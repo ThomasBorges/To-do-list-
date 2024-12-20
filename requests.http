@@ -1,0 +1,13 @@
+### GET usuarios
+GET http://localhost:8080/usuarios
+
+
+### POST Criar usuarios
+POST http://localhost:8080/usuarios
+Content-Type: application/json
+
+{
+    "nome": "thomas",
+    "email": "thomborges2@gmail.com",
+    "senha":"12345"
+}
