@@ -17,11 +17,11 @@ public class Usuario {
     private String email;
 
     @NotBlank
-    private String senha;
+    private Senha senha;
 
     private List<Lista> listas;
 
-    public Usuario(String nome, String email, String senha) {
+    public Usuario(String nome, String email, Senha senha) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
@@ -54,11 +54,11 @@ public class Usuario {
         this.email = email;
     }
 
-    public String getSenha() {
+    public Senha getSenha() {
         return senha;
     }
 
-    public void setSenha(String senha) {
+    public void setSenha(Senha senha) {
         this.senha = senha;
     }
 
