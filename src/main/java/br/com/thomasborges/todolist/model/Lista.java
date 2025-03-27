@@ -1,17 +1,41 @@
 package br.com.thomasborges.todolist.model;
 
+import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
+@Entity
+@Table
 public class Lista {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String nome;
     private String descricao;
+
+    @Column(name = "usuario_id")
+    private Long usuarioId;
+
+    @ManyToOne
+    @JoinColumn(name = "usuario_id", referencedColumnName = "id",insertable = false, updatable = false)
     private Usuario usuario;
+
+    @OneToMany(mappedBy = "lista")
     private List<Tarefa> tarefas;
+
+    @CreatedDate
     private LocalDateTime dataCriacao;
+
+    @LastModifiedDate
     private LocalDateTime dataAtualizacao;
+
+    public Lista(){}
 
     public Lista(String nome) {
         this.nome = nome;
@@ -79,4 +103,35 @@ public class Lista {
         return dataAtualizacao;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getUsuarioId() {
+        return usuarioId;
+    }
+
+    public void setUsuarioId(Long usuarioId) {
+        this.usuarioId = usuarioId;
+    }
+
+    public List<Tarefa> getTarefas() {
+        return tarefas;
+    }
+
+    public void setTarefas(List<Tarefa> tarefas) {
+        this.tarefas = tarefas;
+    }
+
+    public void setDataCriacao(LocalDateTime dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
+    }
 }

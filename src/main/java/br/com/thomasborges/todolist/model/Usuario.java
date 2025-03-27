@@ -1,31 +1,34 @@
 package br.com.thomasborges.todolist.model;
 
-import jakarta.validation.constraints.Email;
-import jakarta.validation.constraints.NotBlank;
+import jakarta.persistence.*;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Objects;
 
+@Entity
+@Table
 public class Usuario {
 
-    @NotBlank
-    private String nome;
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
-    @Email
-    @NotBlank
+    private String nome;
     private String email;
 
-    @NotBlank
+    @Embedded
     private Senha senha;
 
+    @OneToMany(mappedBy = "usuario")
     private List<Lista> listas;
+
+    public Usuario(){}
 
     public Usuario(String nome, String email, Senha senha) {
         this.nome = nome;
         this.email = email;
         this.senha = senha;
-        this.listas = new ArrayList<>();
     }
 
     public void adicionarLista(Lista lista) {
@@ -36,6 +39,14 @@ public class Usuario {
     public void removerLista(Lista lista) {
         this.listas.remove(lista);
         lista.setUsuario(null);
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getNome() {
@@ -60,6 +71,14 @@ public class Usuario {
 
     public void setSenha(Senha senha) {
         this.senha = senha;
+    }
+
+    public List<Lista> getListas() {
+        return listas;
+    }
+
+    public void setListas(List<Lista> listas) {
+        this.listas = listas;
     }
 
     @Override

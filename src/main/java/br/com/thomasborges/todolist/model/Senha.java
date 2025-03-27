@@ -1,20 +1,19 @@
 package br.com.thomasborges.todolist.model;
 
+import jakarta.persistence.Embeddable;
+
+@Embeddable
 public class Senha {  //verificar onde inserir Senha
 
-    private Usuario usuario;
     private String salt;
     private String hashPassword;
 
-    public Senha(Usuario usuario, String salt, String hashPassword) {
-        this.usuario = usuario;
+    public Senha(){}
+
+    public Senha( String salt, String hashPassword) {
         this.salt = salt;
         this.hashPassword = hashPassword;
     }
-
-    public Usuario getUsuario() { return usuario; }
-
-    public void setUsuario(Usuario usuario) { this.usuario = usuario; }
 
     public String getSalt() { return salt; }
 

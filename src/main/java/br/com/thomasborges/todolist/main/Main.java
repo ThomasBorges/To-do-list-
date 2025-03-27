@@ -15,42 +15,42 @@ public class Main {
         app.exibeMenu();
     }
 
-public void exibeMenu() {
-    var opcao = -1;
-    while(opcao != 0) {
-        var menu = """
-                1. Adicionar tarefa
-                2. Listar tarefas
-                3. Marcar tarefa com concluida
-                4. Remover tarefa
-                5. Sair
-                """;
+    public void exibeMenu() {
+        var opcao = -1;
+        while (opcao != 0) {
+            var menu = """
+                    1. Adicionar tarefa
+                    2. Listar tarefas
+                    3. Marcar tarefa com concluida
+                    4. Remover tarefa
+                    5. Sair
+                    """;
 
-        System.out.println(menu);
-        opcao = leitura.nextInt();
-        leitura.nextLine();
+            System.out.println(menu);
+            opcao = leitura.nextInt();
+            leitura.nextLine();
 
-        switch (opcao){
-            case 1:
-                adicionarTarefa();
-                break;
-          case 2:
-                listarTarefa();
-//                break;
+            switch (opcao) {
+                case 1:
+                    adicionarTarefa();
+                    break;
+                case 2:
+                    listarTarefa();
+                    break;
 //          case 3:
 //                marcarComoConcluida();
 //          case 4:
 //                removerTarefa();
-            case 5:
-                System.out.println("Saindo...");
-                opcao = 0;
-                break;
-            default:
-                System.out.println("Opção invalida");
+                case 5:
+                    System.out.println("Saindo...");
+                    opcao = 0;
+                    break;
+                default:
+                    System.out.println("Opção invalida");
 
+            }
         }
     }
-}
 
     private void adicionarTarefa() {
         System.out.println("Digite o nome da tarefa:");
@@ -67,8 +67,11 @@ public void exibeMenu() {
         }
         tarefas.add(tarefa);
         System.out.println("Tarefa adicionada com sucesso!");
-}
-    private void listarTarefa() {
+    }
 
+    private void listarTarefa() {
+        for (Tarefa tarefa : tarefas) {
+            System.out.println("Nome: " + tarefa.getNome());
+        }
     }
 }

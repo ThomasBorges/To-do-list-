@@ -1,17 +1,41 @@
 package br.com.thomasborges.todolist.model;
 
+import jakarta.persistence.*;
+import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.LastModifiedDate;
+
 import java.time.LocalDateTime;
 
+@Entity
+@Table
 public class Tarefa {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     private String nome;
     private String descricao;
+
+    @Column(name = "lista_id")
+    private Long listaId;
+
+    @ManyToOne
+    @JoinColumn(name = "lista_Id", referencedColumnName = "id", insertable = false, updatable = false)
     private Lista lista;
+
+    @Enumerated(EnumType.STRING)
     private Status status;
+
+    @CreatedDate
     private LocalDateTime dataCriacao;
+
+    @LastModifiedDate
     private LocalDateTime dataAtualizacao;
 
     public enum Status { TODO, DONE }
+
+    public Tarefa(){}
 
     public Tarefa(String nome) {
         this.nome = nome;
@@ -76,4 +100,31 @@ public class Tarefa {
         return dataAtualizacao;
     }
 
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getListaId() {
+        return listaId;
+    }
+
+    public void setListaId(Long listaId) {
+        this.listaId = listaId;
+    }
+
+    public void setStatus(Status status) {
+        this.status = status;
+    }
+
+    public void setDataCriacao(LocalDateTime dataCriacao) {
+        this.dataCriacao = dataCriacao;
+    }
+
+    public void setDataAtualizacao(LocalDateTime dataAtualizacao) {
+        this.dataAtualizacao = dataAtualizacao;
+    }
 }
