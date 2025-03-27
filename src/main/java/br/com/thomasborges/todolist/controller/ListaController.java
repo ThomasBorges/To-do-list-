@@ -45,8 +45,9 @@ public class ListaController {
     // POST /usuarios/{usuarioId}/listas
     // POST http://localhost:8080/usuarios/1/listas
     @PostMapping
-    public ResponseEntity<Lista> criar(@PathVariable Long usuarioId,
-                                       @RequestBody @Valid Lista lista) {
+    public ResponseEntity<Lista> criar(
+            @PathVariable Long usuarioId,
+            @RequestBody @Valid Lista lista) {
         lista.setUsuarioId(usuarioId);
         lista = repository.save(lista);
         return ResponseEntity.ok(lista);
