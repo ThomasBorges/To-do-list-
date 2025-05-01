@@ -21,7 +21,8 @@ public class Tarefa {
     private Long listaId;
 
     @ManyToOne
-    @JoinColumn(name = "lista_Id", referencedColumnName = "id", insertable = false, updatable = false)
+    @JoinColumn(name = "lista_Id", referencedColumnName = "id", insertable = false, updatable = false,
+            foreignKey = @ForeignKey(name = "fk_tarefa_lista"))
     private Lista lista;
 
     @Enumerated(EnumType.STRING)
@@ -40,20 +41,12 @@ public class Tarefa {
     public Tarefa(String nome) {
         this.nome = nome;
         this.status = Status.TODO;
-        this.dataCriacao = LocalDateTime.now();
-        this.dataAtualizacao = LocalDateTime.now();
     }
 
     public Tarefa(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
         this.status = Status.TODO;
-        this.dataCriacao = LocalDateTime.now();
-        this.dataAtualizacao = LocalDateTime.now();
-    }
-
-    private void atualizaData() {
-        this.dataAtualizacao = LocalDateTime.now();
     }
 
     public String getNome() {
@@ -62,7 +55,6 @@ public class Tarefa {
 
     public void setNome(String nome) {
         this.nome = nome;
-        atualizaData();
     }
 
     public String getDescricao() {
@@ -71,7 +63,6 @@ public class Tarefa {
 
     public void setDescricao(String descricao) {
         this.descricao = descricao;
-        atualizaData();
     }
 
     public Lista getLista() {
@@ -80,7 +71,6 @@ public class Tarefa {
 
     void setLista(Lista lista) {
         this.lista = lista;
-        atualizaData();
     }
 
     public Status getStatus() {
@@ -89,7 +79,10 @@ public class Tarefa {
 
     public void concluir() {
         this.status = Status.DONE;
-        atualizaData();
+    }
+
+    public void desfazer() {
+        this.status = Status.TODO;
     }
 
     public LocalDateTime getDataCriacao() {

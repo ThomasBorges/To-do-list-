@@ -23,4 +23,7 @@ public interface ListaRepository extends JpaRepository<Lista, Long> {
      * DELETE FROM lista where usuario_id = :usuarioId and id =:listaId
      */
     void deleteByUsuarioIdAndId(Long usuarioId, Long listaId);
+
+    boolean existsByIdAndUsuarioId(Long listaId, Long usuarioId);
+
 }

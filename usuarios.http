@@ -1,13 +1,13 @@
 ### GET usuarios
-GET http://localhost:8080/usuarios
+GET {{url}}/usuarios
 
 
 ### GET usuarios
-GET http://localhost:8080/usuarios/1
+GET {{url}}/usuarios/1
 
 
 ### POST Criar usuarios
-POST http://localhost:8080/usuarios
+POST {{url}}/usuarios
 Content-Type: application/json
 
 {
@@ -17,7 +17,7 @@ Content-Type: application/json
 }
 
 ### PUT Atualizar usuarios
-PUT http://localhost:8080/usuarios/1
+PUT {{url}}/usuarios/1
 Content-Type: application/json
 
 {
@@ -27,5 +27,5 @@ Content-Type: application/json
 }
 
 ### DELETE Deletar usuarios
-DELETE http://localhost:8080/usuarios/1
+DELETE {{url}}/usuarios/1
 Content-Type: application/json

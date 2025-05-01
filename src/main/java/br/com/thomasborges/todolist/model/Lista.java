@@ -5,7 +5,6 @@ import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 
 import java.time.LocalDateTime;
-import java.util.ArrayList;
 import java.util.List;
 
 @Entity
@@ -39,17 +38,11 @@ public class Lista {
 
     public Lista(String nome) {
         this.nome = nome;
-        this.tarefas = new ArrayList<>();
-        this.dataCriacao = LocalDateTime.now();
-        this.dataAtualizacao = LocalDateTime.now();
     }
 
     public Lista(String nome, String descricao) {
         this.nome = nome;
         this.descricao = descricao;
-        this.tarefas = new ArrayList<>();
-        this.dataCriacao = LocalDateTime.now();
-        this.dataAtualizacao = LocalDateTime.now();
     }
 
     public void adicionarTarefa(Tarefa tarefa) {

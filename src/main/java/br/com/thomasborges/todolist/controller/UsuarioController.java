@@ -9,7 +9,9 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.crypto.bcrypt.BCrypt;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 
+import java.net.URI;
 import java.util.List;
 import java.util.Random;
 import java.util.function.Function;
@@ -24,9 +26,7 @@ public class UsuarioController {
         this.repository = repository;
     }
 
-
     private static final Function<Usuario, UsuarioResponse> toResponse = (usuario) -> new UsuarioResponse(usuario.getId(), usuario.getNome(), usuario.getEmail());
-
 
     // GET /usuarios
     // GET http://localhost:8080/usuarios
@@ -57,7 +57,15 @@ public class UsuarioController {
         var senha = new Senha(salt, hash);
         var novoUsuario = new Usuario(request.nome(), request.email(), senha);
         novoUsuario = repository.save(novoUsuario);
-        return ResponseEntity.ok(toResponse.apply(novoUsuario));
+
+
+        URI location = ServletUriComponentsBuilder
+                .fromCurrentRequest()
+                .path("/{id}")
+                .buildAndExpand(novoUsuario.getId())
+                .toUri();
+
+        return ResponseEntity.created(location).body(toResponse.apply(novoUsuario));
     }
 
     // PUT /usuarios/{id}
