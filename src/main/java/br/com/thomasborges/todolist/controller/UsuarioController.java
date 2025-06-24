@@ -36,7 +36,7 @@ public class UsuarioController {
     }
 
     // GET /usuarios/{id}
-    // GET http://localhost:8080/usuarios/{od}
+    // GET http://localhost:8080/usuarios/{id}
     @GetMapping("/{id}")
     public ResponseEntity<UsuarioResponse> getUsuario(@PathVariable Long id) {
         var resultado = repository.findById(id);
